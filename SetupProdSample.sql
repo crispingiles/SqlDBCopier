@@ -1,0 +1,63 @@
+use ProdSample
+
+CREATE TABLE dbo.A
+(
+	AId INT NOT NULL,
+	Name VARCHAR(32) NOT NULL,
+
+	CONSTRAINT [PK_A] PRIMARY KEY CLUSTERED  (AId ASC)
+)
+
+CREATE TABLE dbo.B
+(
+	BId INT NOT NULL,
+	AId INT NOT NULL,
+
+	CONSTRAINT [PK_B] PRIMARY KEY CLUSTERED (BId ASC),
+	CONSTRAINT [FK_B_AId] FOREIGN KEY (AId) REFERENCES [dbo].[A] (AId)
+)
+
+CREATE TABLE dbo.C
+(
+	CId INT NOT NULL,
+	AId INT NOT NULL,
+	BId INT NOT NULL,
+
+	CONSTRAINT [PK_C] PRIMARY KEY CLUSTERED (CId ASC),
+	CONSTRAINT [FK_C_AId] FOREIGN KEY (AId) REFERENCES [dbo].[A] (AId),
+	CONSTRAINT [FK_C_BId] FOREIGN KEY (BId) REFERENCES [dbo].[B] (BId)
+)
+
+INSERT INTO dbo.A (AId, Name) VALUES (1, 'One'), (2, 'Two'), (3, 'Three')
+INSERT INTO dbo.B (BId, AId) VALUES (1,1),(2,2),(3,3)
+INSERT INTO dbo.C (CId, AId, BId) VALUES (1,1,1), (2,2,2), (3,3,3), (4,2,2)
+GO
+
+CREATE VIEW dbo.vwCWithNames
+AS
+SELECT c.CId, ca.Name as CAName, ba.Name as BAName
+FROM dbo.C c
+INNER JOIN dbo.A ca
+ON c.AId = ca.AId
+INNER JOIN dbo.B b
+on c.BId = b.BId
+INNER JOIN dbo.A ba
+ON b.AId = ba.AId
+GO
+
+CREATE TABLE AHist
+(
+	Timestamp DATETIME2(7) NOT NULL,
+	Action CHAR(1) NOT NULL,
+	AId INT NOT NULL,
+	Name VARCHAR(32) NOT NULL
+)
+GO
+
+CREATE TRIGGER [dbo].[trAInsert] 
+ON dbo.A FOR INSERT
+AS
+	INSERT INTO dbo.AHist (Action, Timestamp, AId, Name)
+	SELECT 'I', GETDATE(), inserted.AId, inserted.Name
+	FROM inserted
+GO
