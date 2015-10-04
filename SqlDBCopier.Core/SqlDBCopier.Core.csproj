@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ForeignKey.cs" />
+    <Compile Include="ForeignKeyProvider.cs" />
+    <Compile Include="IForeignKeyProvider.cs" />
     <Compile Include="ISchemaProvider.cs" />
     <Compile Include="ISqlConnectionProvider.cs" />
     <Compile Include="ISqlExpressionDependencyProvider.cs" />
@@ -53,6 +56,7 @@
     <Compile Include="SqlConnectionProvider.cs" />
     <Compile Include="SqlExpressionDependency.cs" />
     <Compile Include="SqlExpressionDependencyProvider.cs" />
+    <Compile Include="SqlModule.cs" />
     <Compile Include="SqlObject.cs" />
     <Compile Include="SqlObjectProvider.cs" />
   </ItemGroup>

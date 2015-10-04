@@ -16,7 +16,9 @@ namespace WBSoft.SqlDBCopier.Console
             var prodSampleConnectionProvider = new SqlConnectionProvider(prodSampleConnectionStr);
             var schemaProvider = new SchemaProvider(
                 new SqlObjectProvider(), 
-                new SqlExpressionDependencyProvider());
+                new SqlExpressionDependencyProvider(),
+                new ForeignKeyProvider()
+                );
 
             var schema = schemaProvider.GetSchema(prodSampleConnectionProvider);
             return 0;

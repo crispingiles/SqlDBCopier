@@ -10,14 +10,18 @@ namespace WBSoft.SqlDBCopier.Core
     {
         public Schema(
             IReadOnlyList<SqlObject> objects, 
-            IReadOnlyList<SqlExpressionDependency> expressionDependencies)
+            IReadOnlyList<SqlExpressionDependency> expressionDependencies, 
+            IReadOnlyList<ForeignKey> foreignKeys)
         {
             Objects = objects;
             ExpressionDependencies = expressionDependencies;
+            ForeignKeys = foreignKeys;
         }
 
         IReadOnlyList<SqlObject> Objects { get; }
 
         IReadOnlyList<SqlExpressionDependency> ExpressionDependencies { get; }
+
+        IReadOnlyList<ForeignKey> ForeignKeys { get; }
     }
 }
