@@ -47,6 +47,7 @@
     <Compile Include="ISchemaProvider.cs" />
     <Compile Include="ISqlConnectionProvider.cs" />
     <Compile Include="ISqlExpressionDependencyProvider.cs" />
+    <Compile Include="ISqlModuleProvider.cs" />
     <Compile Include="ISqlObjectProvider.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="ObjectTypeUtil.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="SqlExpressionDependency.cs" />
     <Compile Include="SqlExpressionDependencyProvider.cs" />
     <Compile Include="SqlModule.cs" />
+    <Compile Include="SqlModuleProvider.cs" />
     <Compile Include="SqlObject.cs" />
     <Compile Include="SqlObjectProvider.cs" />
   </ItemGroup>
