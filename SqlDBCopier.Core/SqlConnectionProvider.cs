@@ -17,5 +17,11 @@ namespace WBSoft.SqlDBCopier.Core
             connection.Open();
             return connection;
         }
+
+        public SqlConnection GetConnection()
+        {
+            var connection = new SqlConnection(ConnectionString);
+            return connection;
+        }
     }
 }

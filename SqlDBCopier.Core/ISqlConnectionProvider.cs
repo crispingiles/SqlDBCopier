@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace WBSoft.SqlDBCopier.Core
 {
@@ -16,5 +11,10 @@ namespace WBSoft.SqlDBCopier.Core
         /// Get an open <see cref="SqlConnection"/>
         /// </summary>
         SqlConnection GetOpenConnection();
+
+        /// <summary>
+        /// Get a <see cref="SqlConnection"/> which will need to be opened manually
+        /// </summary>
+        SqlConnection GetConnection();
     }
 }

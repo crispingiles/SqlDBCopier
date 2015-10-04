@@ -9,7 +9,7 @@ namespace WBSoft.SqlDBCopier.Core
         {
             using (var conn = sqlConnectionProvider.GetOpenConnection())
             {
-                const string cmdText = @"SELECT s.name, s.object_id, s.type 
+                const string cmdText = @"SELECT s.name, s.object_id, s.parent_object_id, s.type 
 FROM sys.objects s 
 WHERE s.is_ms_shipped = 0";
 
@@ -23,7 +23,8 @@ WHERE s.is_ms_shipped = 0";
                             new SqlObject(
                                 reader.GetString(0),
                                 reader.GetInt32(1),
-                                ObjectTypeUtil.GetObjectType(reader.GetString(2))
+                                reader.GetInt32(2),
+                                ObjectTypeUtil.GetObjectType(reader.GetString(3))
                                 ));
                     }
                 }

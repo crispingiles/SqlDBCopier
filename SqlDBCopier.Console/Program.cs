@@ -12,16 +12,24 @@ namespace WBSoft.SqlDBCopier.Console
     {
         public static int Main(string[] args)
         {
-            var prodSampleConnectionStr = ConfigurationManager.AppSettings["prodDBConnectionString"];
-            var prodSampleConnectionProvider = new SqlConnectionProvider(prodSampleConnectionStr);
+            var prodSampleConnectionProvider = new SqlConnectionProvider(ConfigurationManager.AppSettings["prodDBConnectionString"]);
+            var uatSampleConnectionProvider = new SqlConnectionProvider(ConfigurationManager.AppSettings["uatDBConnectionString"]);
             var schemaProvider = new SchemaProvider(
                 new SqlObjectProvider(), 
                 new SqlExpressionDependencyProvider(),
                 new ForeignKeyProvider(),
-                new SqlModuleProvider()
+                new SqlModuleProvider(),
+                new TableDefinitionProvider()
                 );
 
-            var schema = schemaProvider.GetSchema(prodSampleConnectionProvider);
+            var fromSchema = schemaProvider.GetSchema(prodSampleConnectionProvider);
+            var toSchema = schemaProvider.GetSchema(uatSampleConnectionProvider);
+
+            var migrateSchemaCommandGenerator = new MigrateSchemaCommandGenerator();
+            var commands = migrateSchemaCommandGenerator.GetCommands(fromSchema, toSchema);
+
+            var schemaCommand = string.Join(Environment.NewLine, commands.Select(c => c.CommandText));
+
             return 0;
         }
     }
