@@ -53,12 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Column.cs" />
+    <Compile Include="ColumnProvider.cs" />
+    <Compile Include="ColumnType.cs" />
     <Compile Include="CreateCommand.cs" />
     <Compile Include="DeleteCommand.cs" />
+    <Compile Include="IColumnProvider.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="ISqlObjectDependencySorter.cs" />
     <Compile Include="ITableDefinitionProvider.cs" />
     <Compile Include="MigrateSchemaCommandGenerator.cs" />
     <Compile Include="OrderedDep.cs" />
+    <Compile Include="SqlObjectDependencySorter.cs" />
     <Compile Include="TableDefinition.cs" />
     <Compile Include="TableDefinitionProvider.cs" />
     <Compile Include="ForeignKey.cs" />

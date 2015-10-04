@@ -13,13 +13,15 @@ namespace WBSoft.SqlDBCopier.Core
             IReadOnlyList<SqlExpressionDependency> expressionDependencies, 
             IReadOnlyList<ForeignKey> foreignKeys, 
             IReadOnlyList<SqlModule> modules, 
-            IReadOnlyList<TableDefinition> tableDefinitions)
+            IReadOnlyList<TableDefinition> tableDefinitions, 
+            IReadOnlyList<Column> columns)
         {
             Objects = objects;
             ExpressionDependencies = expressionDependencies;
             ForeignKeys = foreignKeys;
             Modules = modules;
             TableDefinitions = tableDefinitions;
+            Columns = columns;
         }
 
         public IReadOnlyList<SqlObject> Objects { get; }
@@ -34,5 +36,7 @@ namespace WBSoft.SqlDBCopier.Core
         /// These are populated via the same code SSMS uses
         /// </summary>
         public IReadOnlyList<TableDefinition> TableDefinitions { get; }
+
+        public IReadOnlyList<Column> Columns { get; }
     }
 }
