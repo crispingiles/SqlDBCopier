@@ -22,11 +22,12 @@ namespace WBSoft.SqlDBCopier.Console
                 new TableDefinitionProvider(),
                 new ColumnProvider()
                 );
+            var sqlObjectDependencySorter = new SqlObjectDependencySorter();
 
             var fromSchema = schemaProvider.GetSchema(prodSampleConnectionProvider);
             var toSchema = schemaProvider.GetSchema(uatSampleConnectionProvider);
 
-            var migrateSchemaCommandGenerator = new MigrateSchemaCommandGenerator();
+            var migrateSchemaCommandGenerator = new MigrateSchemaCommandGenerator(sqlObjectDependencySorter);
             var commands = migrateSchemaCommandGenerator.GetCommands(fromSchema, toSchema);
 
             var schemaCommand = string.Join(Environment.NewLine, commands.Select(c => c.CommandText));
